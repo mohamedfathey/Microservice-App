@@ -39,6 +39,7 @@ Here’s how the project is structured (it’s like a little city of services! �
   2. When a service needs to talk to another (e.g., `order-service` looking for `inventory-service`), it asks the discovery server, “Where’s my friend?” 🤔
   3. The discovery server shares the address (IP and port). 🗣️
 - **Why It’s Awesome**: No hardcoded URLs! Services can move around, and the discovery server keeps everyone connected. 🌐
+- **Want to Try Discovery Server ?** 🗺️ Check out this awesome [Discovery Server explanation](https://github.com/mohamedfathey/Microservice-App/tree/main/microservice-new/discovery-server) to get started! 🚀
 
 ### 2. **API Gateway (`api-gateway`) 🚪**
 - **What It Does**: The *main entrance* for all API requests, built with **Spring Cloud Gateway**. It routes traffic to the right service. 🚦
@@ -47,6 +48,9 @@ Here’s how the project is structured (it’s like a little city of services! �
   2. The gateway forwards the request to the right service (e.g., `product-service`). ➡️
   3. It also handles *fancy stuff* like authentication and logging. 🔒
 - **Why It’s Great**: Clients don’t need to know where each service lives. It’s a clean, unified API for everyone! 🎯
+
+- **Want to Try API Gateway ?** 🚪 Check out this awesome [API Gateway explanation](https://github.com/mohamedfathey/Microservice-App/tree/main/microservice-new/api-gatway) to get started! 🚀
+
 
 ### 3. **Product Service (`product-service`) 🛍️**
 - **What It Does**: Manages products—like adding, updating, or fetching product details. 🧀
