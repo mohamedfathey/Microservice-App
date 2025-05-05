@@ -1,0 +1,54 @@
+server:
+  port: 9496
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: product-service
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/product/(?<segment>.*), /api/product/$\{segment}
+            - AddRequestHeader=X-Gateway, true  # أضفنا الـ Header هنا
+
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api/order/(?<segment>.*), /api/order/$\{segment}
+            - AddRequestHeader=X-Gateway, true  # أضفنا الـ Header هنا
+
+        - id: inventory-service
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            - Path=/api/inventory/**
+          filters:
+            - RewritePath=/api/inventory/(?<segment>.*), /api/inventory/$\{segment}
+            - AddRequestHeader=X-Gateway, true  # أضفنا الـ Header هنا
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: false
+  instance:
+    prefer-ip-address: true
